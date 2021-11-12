@@ -34,7 +34,7 @@ The data code is structured into the following:
 2. `IWeatherForecastDataBroker` - the data interface to the logic/business/core application layer.  Defined as an interface to provide abstraction.  In the applicationther are two implementations: `WeatherForecastServerDataBroker` and `WeatherForecastAPIDataBroker`
 3. `WeatherForecastViewService` - the logic/business/core application layer.  This holds the "single version of the truth" for the UI layer.
 
-This may seem overkill for such a small project, but the point os to show how a solution should be structured, with proper separation of concerns.
+This may seem overkill for such a small project, but the point is to show how a solution should be structured, with proper separation of concerns.
 
 ## UI
 
