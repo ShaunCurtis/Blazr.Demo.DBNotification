@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 namespace Blazr.Demo.DBNotification.Data
 {
+    /// <summary>
+    /// A dummy data provider using Task.Delay to emulate async behaviour
+    /// Normally replaced with an EF or other data base layer
+    /// </summary>
     public class WeatherForecastDataProvider
     {
         private int _recordsToGet = 5;
@@ -38,23 +42,16 @@ namespace Blazr.Demo.DBNotification.Data
             }).ToList();
         }
 
-        public Task<bool> AddForecastAsync(WeatherForecast record)
+        public async Task<bool> AddForecastAsync(WeatherForecast record)
         {
-            //var index = _records.Max(index => index.index);
-            //var rng = new Random();
-            //var record = new WeatherForecast
-            //{
-            //    Id = Guid.NewGuid(),
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = rng.Next(-20, 55),
-            //    Summary = Summaries[rng.Next(Summaries.Length)]
-            //};
+            await Task.Delay(500);
             _records.Add(record);
-            return Task.FromResult(true);
+            return true;
         }
 
-        public Task<bool> DeleteForecastAsync(Guid Id)
+        public async Task<bool> DeleteForecastAsync(Guid Id)
         {
+            await Task.Delay(500);
             var deleted = false;
             var record = _records.FirstOrDefault(item => item.Id == Id);
             if (record != null)
@@ -62,15 +59,16 @@ namespace Blazr.Demo.DBNotification.Data
                 _records.Remove(record);
                 deleted = true;
             }
-            return Task.FromResult(deleted);
+            return deleted;
         }
 
-        public Task<List<WeatherForecast>> GetWeatherForecastsAsync()
+        public async Task<List<WeatherForecast>> GetWeatherForecastsAsync()
         {
+            await Task.Delay(1000);
             var list = new List<WeatherForecast>();
             _records
                 .ForEach(item => list.Add(item with { }));
-            return Task.FromResult(list);
+            return list;
         }
     }
 }
